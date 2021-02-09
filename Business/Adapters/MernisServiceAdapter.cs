@@ -15,6 +15,7 @@ namespace Business.Adapters
             KPSPublicSoapClient client = new KPSPublicSoapClient(KPSPublicSoapClient.EndpointConfiguration.KPSPublicSoap);
 
 
+
             return client.TCKimlikNoDogrulaAsync(new TCKimlikNoDogrulaRequest
                 (new TCKimlikNoDogrulaRequestBody(Convert.ToInt64(customer.NationaltyIdentity),customer.FirstName,
                 customer.LastName,customer.DateOfBirth.Year))).Result.Body.TCKimlikNoDogrulaResult;

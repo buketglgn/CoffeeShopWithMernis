@@ -9,5 +9,6 @@ namespace Business.Abstract
     {
         void Add(Customer customer);
         void Update(Customer customer);
+
     }
 }
