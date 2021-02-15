@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,29 +19,48 @@ namespace Business.Concrete
         }
 
 
-        public void Add(Customer customer)
+        public IResult Add(Customer customer)
         {
             if (_customerCheckService.CheckIfRealPerson(customer))
             {
                 _customerDal.Add(customer);
+                return new ErrorResult("Ekleme basarılı");
+                
             }
-            else
-            {
-                Console.WriteLine("Not a Valid Person");
-            }
+            return new ErrorResult("EKLEME BAŞARISIZ");
         }
 
-        public void Update(Customer customer)
+        public IResult Delete(int Id)
+        {
+            
+            _customerDal.Delete(p=>p.Id==Id);
+            return new SuccessResult("Silme işlemi Basarılı");
+        }
+
+        public IDataResult<Customer> Get(int Id)
+        {
+            
+            return new SuccessDataResult<Customer>(_customerDal.Get(p => p.Id == Id));
+        }
+
+        public IDataResult<List<Customer>> GetAll()
+        {
+            
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
+        }
+
+        public IResult Update(Customer customer)
         {
             if (_customerCheckService.CheckIfRealPerson(customer))
             {
                 _customerDal.Update(customer);
+                return new SuccessResult("Güncelleme basarılı");
+                
             }
-            else
-            {
-                Console.WriteLine("Not a Valid Person");
-            }
+            return new ErrorResult("Güncelleme BAŞARISIZ");
         }
+
+       
     }
 
     }

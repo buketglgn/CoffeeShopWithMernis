@@ -13,8 +13,19 @@ namespace ConsoleUI
         {
            StarbucksCustomerManager customerManager = new StarbucksCustomerManager(new MernisServiceAdapter(), new EfCustomerDal());
 
-            customerManager.Add(new Customer { DateOfBirth = new DateTime(1996, 12, 23), FirstName = "sfsg", LastName = "fsf", NationaltyIdentity = "34356" }) ;
+           // customerManager.Add(new Customer { DateOfBirth = new DateTime(1995, 05, 22), FirstName = "Özcan", LastName = "Gülgün", NationaltyIdentity = "3458875498" }) ;
 
+           
+                foreach (var customer in  customerManager.GetAll().Data)
+                            {
+                                Console.WriteLine(customer.FirstName+"/"+customer.LastName);
+                            }
+            
+         
+
+
+            
+           
         }
     }
 }
